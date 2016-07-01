@@ -14,4 +14,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"/>
+
+    <ImageView
+        android:id="@+id/imgTest"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+
+        />
 </RelativeLayout>
