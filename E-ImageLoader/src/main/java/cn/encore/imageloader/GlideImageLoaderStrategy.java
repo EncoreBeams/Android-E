@@ -25,66 +25,81 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy {
     @Override
     public void loadImage(Context ctx, ImageLoader img) {
 
-        boolean flag= SettingUtils.getOnlyWifiLoadImg(ctx);
+        boolean flag = SettingUtils.getOnlyWifiLoadImg(ctx);
         //如果不是在wifi下加载图片，直接加载
-        if(!flag){
-            loadNormal(ctx,img);
-            return;
-        }
 
-        int strategy =img.getWifiStrategy();
-        if(strategy == ImageLoaderManager.LOAD_STRATEGY_ONLY_WIFI){
+
+        int strategy = img.getWifiStrategy();
+        if (strategy == ImageLoaderManager.LOAD_STRATEGY_ONLY_WIFI || flag) {
             int netType = AppUtils.getNetWorkType(ctx);
             //如果是在wifi下才加载图片，并且当前网络是wifi,直接加载
-            if(netType == AppUtils.NETWORKTYPE_WIFI) {
+            if (netType == AppUtils.NETWORKTYPE_WIFI) {
                 loadNormal(ctx, img);
             } else {
                 //如果是在wifi下才加载图片，并且当前网络不是wifi，加载缓存
                 loadCache(ctx, img);
             }
-        }else{
+        } else {
             //如果不是在wifi下才加载图片
-            loadNormal(ctx,img);
+            loadNormal(ctx, img);
         }
 
     }
-
 
     /**
      * load image with Glide
      */
     private void loadNormal(Context ctx, ImageLoader img) {
-        if(img == null) return;
+        loadNormal(img, Glide.with(ctx));
+    }
+
+    /**
+     * load image with Glide
+     */
+    private void loadNormal(ImageLoader img, Object obj) {
+        if (img == null) return;
+
 
         //处理加载图片
         Object load = null;
-        if(img.getUrl()!= null && !img.getUrl().equals("")){
+        if (img.getUrl() != null && !img.getUrl().equals("")) {
             load = img.getUrl();
-        }else if(img.getResourceId() != -1){
+        } else if (img.getResourceId() != -1) {
             load = img.getResourceId();
-        }else if(img.getFile() != null && img.getFile().exists()){
+        } else if (img.getFile() != null && img.getFile().exists()) {
             load = img.getFile();
         }
-        //加载图片
-        RequestManager rm =  Glide.with(ctx);
+
         //获取实例
-        DrawableTypeRequest dr = rm.load(load);
+        DrawableTypeRequest dr = null;
+        if (obj instanceof RequestManager) {
+            dr = ((RequestManager) obj).load(load);
+        } else if (obj instanceof RequestManager.ImageModelRequest) {
+            dr = ((RequestManager.ImageModelRequest) obj).load(load);
+            dr.diskCacheStrategy(DiskCacheStrategy.ALL);
+        }
+        if (dr == null) {
+            return;
+        }
         //设置占位图
         dr.placeholder(img.getDefaultImg());
         //设置重设图片大小
-        if(img.getResizeWidth() != -1 && img.getResizeHeight() != -1) {
+        if (img.getResizeWidth() != -1 && img.getResizeHeight() != -1) {
             dr.override(img.getResizeWidth(), img.getResizeHeight());
         }
+
+
         //加载imageView
         dr.into(img.getImgView());
+
     }
 
 
     /**
-     *load cache image with Glide
+     * load cache image with Glide
      */
     private void loadCache(Context ctx, ImageLoader img) {
-        Glide.with(ctx).using(new StreamModelLoader<String>() {
+        RequestManager.ImageModelRequest imageModelRequest = Glide.with(ctx).using(new StreamModelLoader<String>() {
             @Override
             public DataFetcher<InputStream> getResourceFetcher(final String model, int i, int i1) {
                 return new DataFetcher<InputStream>() {
@@ -109,9 +124,8 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy {
                     }
                 };
             }
-        }).load(img.getUrl())
-                .placeholder(img.getDefaultImg())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(img.getImgView());
+        });
+
+        loadNormal(img, imageModelRequest);
     }
 }
