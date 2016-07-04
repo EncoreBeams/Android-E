@@ -1,4 +1,4 @@
-package cn.encore.mvpbase;
+package cn.encore.mvpbase.model;
 
 /**
  * Created by：Encore
