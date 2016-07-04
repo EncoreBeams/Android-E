@@ -1,1 +1,1 @@
-include ':app', ':E-FrameHttp', ':E-FileDownload', ':E-ImageLoader', ':E-FrameCommon'
+include ':app', ':E-FrameHttp', ':E-FileDownload', ':E-ImageLoader', ':E-FrameCommon', ':E-SwipeBackHelper', ':E-MvpBase', ':E-FrameRxJava'

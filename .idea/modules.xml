@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Android-E.iml" filepath="$PROJECT_DIR$/Android-E.iml" />
+      <module fileurl="file://$PROJECT_DIR$/E-FileDownload/E-FileDownload.iml" filepath="$PROJECT_DIR$/E-FileDownload/E-FileDownload.iml" />
+      <module fileurl="file://$PROJECT_DIR$/E-FrameCommon/E-FrameCommon.iml" filepath="$PROJECT_DIR$/E-FrameCommon/E-FrameCommon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/E-FrameHttp/E-FrameHttp.iml" filepath="$PROJECT_DIR$/E-FrameHttp/E-FrameHttp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/E-FrameRxJava/E-FrameRxJava.iml" filepath="$PROJECT_DIR$/E-FrameRxJava/E-FrameRxJava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/E-ImageLoader/E-ImageLoader.iml" filepath="$PROJECT_DIR$/E-ImageLoader/E-ImageLoader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/E-MvpBase/E-MvpBase.iml" filepath="$PROJECT_DIR$/E-MvpBase/E-MvpBase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/E-SwipeBackHelper/E-SwipeBackHelper.iml" filepath="$PROJECT_DIR$/E-SwipeBackHelper/E-SwipeBackHelper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+    </modules>
+  </component>
+</project>

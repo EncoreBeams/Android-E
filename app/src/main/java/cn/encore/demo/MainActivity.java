@@ -1,26 +1,26 @@
 package cn.encore.demo;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.ImageView;
+import android.view.View;
 
-import cn.encore.imageloader.ImageLoader;
-import cn.encore.imageloader.ImageLoaderManager;
+import cn.encore.framecommon.base.activity.EFrameBaseActivity;
+import cn.encore.framecommon.base.configuration.EFrameConfiguration;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends EFrameBaseActivity {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public int getContentViewResId() {
+        return R.layout.activity_main;
+    }
 
-        ImageView imageView = (ImageView) findViewById(R.id.imgTest);
+    @Override
+    public void initViews(View contentView) {
+    }
 
-        ImageLoader imageLoader = new ImageLoader.Builder()
-                .load("http://cdn.sspai.com/attachment/thumbnail/2016/06/28/98a9788ea7e0f8e1c8eefb2d87393c9151d8b_mw_800_wm_1_wmp_3.jpg")
-                .imgView(imageView)
+    @Override
+    public EFrameConfiguration getConfiguration() {
+        return new EFrameConfiguration.Builder()
+                .setSwipeBack(false) //首页设置禁止滑动退出
                 .build();
-
-        ImageLoaderManager.getInstance().loadImage(this,imageLoader);
     }
 }

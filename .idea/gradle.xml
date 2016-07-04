@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/E-FileDownload" />
+            <option value="$PROJECT_DIR$/E-FrameCommon" />
+            <option value="$PROJECT_DIR$/E-FrameHttp" />
+            <option value="$PROJECT_DIR$/E-FrameRxJava" />
+            <option value="$PROJECT_DIR$/E-ImageLoader" />
+            <option value="$PROJECT_DIR$/E-MvpBase" />
+            <option value="$PROJECT_DIR$/E-SwipeBackHelper" />
+            <option value="$PROJECT_DIR$/app" />
+          </set>
+        </option>
+        <option name="myModules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/E-FileDownload" />
+            <option value="$PROJECT_DIR$/E-FrameCommon" />
+            <option value="$PROJECT_DIR$/E-FrameHttp" />
+            <option value="$PROJECT_DIR$/E-FrameRxJava" />
+            <option value="$PROJECT_DIR$/E-ImageLoader" />
+            <option value="$PROJECT_DIR$/E-MvpBase" />
+            <option value="$PROJECT_DIR$/E-SwipeBackHelper" />
+            <option value="$PROJECT_DIR$/app" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
