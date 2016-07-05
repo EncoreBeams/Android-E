@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import cn.encore.framecommon.log.jlog.JLog;
 import cn.encore.framecommon.utils.CloseUtils;
 import cn.encore.framecommon.utils.JsonUtils;
 
@@ -43,7 +42,6 @@ public class AppConfigManager {
      * @return
      */
     public AppConfig getAppConfig(Context context) {
-        JLog.d(TAG, "getAppConfig()");
         if (mAppConfig != null) {
             return mAppConfig;
         }
@@ -66,7 +64,6 @@ public class AppConfigManager {
      * @return
      */
     private String readConfig(Context context) {
-        JLog.d(TAG, "read App Config");
         InputStream is = null;
         InputStreamReader reader = null;
         BufferedReader bufferedReader = null;
@@ -81,7 +78,6 @@ public class AppConfigManager {
                 buffer.append("\n");
             }
         } catch (IOException e) {
-            JLog.e(TAG, "read app config exception!");
             e.printStackTrace();
         } finally {
             CloseUtils.closeQuietly(is);

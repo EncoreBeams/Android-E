@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import cn.encore.framecommon.base.configuration.ConfigActivityDeleagetImpl;
 import cn.encore.framecommon.base.configuration.ConfigDelegate;
 import cn.encore.framecommon.base.configuration.ConfigSettingInterface;
 import cn.encore.framecommon.base.configuration.EFrameConfiguration;
@@ -16,7 +17,7 @@ import cn.encore.framecommon.base.configuration.EFrameConfiguration;
  */
 public abstract class EFrameBaseActivity extends AppCompatActivity implements ConfigSettingInterface {
     //配置管理
-    private ConfigDelegate mDelegate;
+    private ConfigActivityDeleagetImpl mDelegate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,9 +38,9 @@ public abstract class EFrameBaseActivity extends AppCompatActivity implements Co
      * @return The {@link ConfigDelegate} being used by this Activity.
      */
     @NonNull
-    public ConfigDelegate getConfigDelegate() {
+    public ConfigActivityDeleagetImpl getConfigDelegate() {
         if (mDelegate == null) {
-            mDelegate = ConfigDelegate.create(this, this);
+            mDelegate = (ConfigActivityDeleagetImpl) ConfigDelegate.create(this, this);
         }
         return mDelegate;
     }
@@ -61,8 +62,8 @@ public abstract class EFrameBaseActivity extends AppCompatActivity implements Co
      * .build();
      */
     @Override
-    public EFrameConfiguration getConfiguration() {
-        return null;
+    public EFrameConfiguration getConfiguration(EFrameConfiguration.Builder builder) {
+        return builder.build();
     }
 
     @Override

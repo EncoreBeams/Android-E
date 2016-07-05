@@ -34,5 +34,5 @@ public interface ConfigSettingInterface {
      * 获取设置管理器
      * @return
      */
-    public EFrameConfiguration getConfiguration();
+    public EFrameConfiguration getConfiguration(EFrameConfiguration.Builder builder);
 }

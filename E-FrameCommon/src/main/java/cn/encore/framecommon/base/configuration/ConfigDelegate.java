@@ -63,4 +63,6 @@ public abstract class ConfigDelegate {
     public static ConfigDelegate create(Fragment fragment, ConfigSettingInterface configSetting) {
         return new ConfigFragmentDeleagetImpl(fragment, configSetting);
     }
+
+
 }

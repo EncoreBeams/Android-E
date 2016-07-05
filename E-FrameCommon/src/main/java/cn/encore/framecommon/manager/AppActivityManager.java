@@ -36,21 +36,25 @@ public class AppActivityManager {
 	//finish last stack activity
 	public void finishActivity() {
 		Activity activity = (Activity) activityStack.lastElement();
-		finishActivity(activity);
+		if(activity != null) {
+			removeActivity(activity);
+			activity.finish();
+		}
 	}
 
 	//finsh activity
-	public void finishActivity(Activity activity) {
+	public void removeActivity(Activity activity) {
 		if (activity != null) {
 			activityStack.remove(activity);
-			activity.finish();
+//			activity.finish();
 		}
 	}
 
 	public void finishActivity(Class cls) {
 		for (Activity activity : activityStack) {
 			if (activity.getClass().equals(cls)) {
-				finishActivity(activity);
+				removeActivity(activity);
+				if(activity != null) activity.finish();
 			}
 		}
 	}

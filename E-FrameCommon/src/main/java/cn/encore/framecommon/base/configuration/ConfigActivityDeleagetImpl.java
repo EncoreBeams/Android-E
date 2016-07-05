@@ -54,7 +54,7 @@ public class ConfigActivityDeleagetImpl extends ConfigBaseDeleagetImpl {
         }
         //app manager
         //app 堆栈管理
-        AppActivityManager.getAppManager().finishActivity(mActivity);
+        AppActivityManager.getAppManager().removeActivity(mActivity);
 
         mActivity = null;
     }

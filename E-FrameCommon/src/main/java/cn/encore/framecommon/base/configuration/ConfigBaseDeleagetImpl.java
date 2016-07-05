@@ -40,12 +40,9 @@ public abstract class ConfigBaseDeleagetImpl extends ConfigDelegate {
     public void onCreate(Bundle savedInstanceState) {
         //生成默认Config配置,或者子类自定义配置
         if (mEFrameConfiguration == null) {
-            mEFrameConfiguration = mConfigSettingInterface.getConfiguration();
+            mEFrameConfiguration = mConfigSettingInterface.getConfiguration(new EFrameConfiguration.Builder());
         }
-        //如果子类不处理任何数据生成默认 config
-        if(mEFrameConfiguration == null) {
-            mEFrameConfiguration = new EFrameConfiguration.Builder().build();
-        }
+
     }
 
     /**
@@ -78,8 +75,10 @@ public abstract class ConfigBaseDeleagetImpl extends ConfigDelegate {
             if (mEFrameConfiguration.isUseButterKnife()) {
                 ButterKnife.bind(mFrom, contentView);
             }
-            //回调initViews
-            mConfigSettingInterface.initViews(contentView);
+            if(mEFrameConfiguration.isCallInitViews()) {
+                //回调initViews
+                mConfigSettingInterface.initViews(contentView);
+            }
         }
         return contentView;
     }
@@ -95,14 +94,18 @@ public abstract class ConfigBaseDeleagetImpl extends ConfigDelegate {
 
     }
 
-
+    //onPause
     @Override
     public void onPause() {
 
     }
-
+    //onResume
     @Override
     public void onResume() {
 
+    }
+
+    public void setEFrameConfiguration(EFrameConfiguration EFrameConfiguration) {
+        mEFrameConfiguration = EFrameConfiguration;
     }
 }

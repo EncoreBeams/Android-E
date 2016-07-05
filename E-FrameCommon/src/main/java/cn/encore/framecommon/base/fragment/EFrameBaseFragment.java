@@ -26,6 +26,7 @@ public abstract class EFrameBaseFragment extends Fragment implements ConfigSetti
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getConfigDelegate().onCreate(savedInstanceState);
+
     }
 
     @Nullable
@@ -59,8 +60,8 @@ public abstract class EFrameBaseFragment extends Fragment implements ConfigSetti
      * @return
      */
     @Override
-    public EFrameConfiguration getConfiguration() {
-        return null;
+    public EFrameConfiguration getConfiguration(EFrameConfiguration.Builder builder) {
+        return builder.build();
     }
 
 
