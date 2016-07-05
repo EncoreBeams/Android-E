@@ -4,6 +4,7 @@ import android.view.View;
 
 import cn.encore.framecommon.base.activity.EFrameBaseActivity;
 import cn.encore.framecommon.base.configuration.EFrameConfiguration;
+import cn.encore.framecommon.log.jlog.JLog;
 
 public class MainActivity extends EFrameBaseActivity {
 
@@ -15,12 +16,13 @@ public class MainActivity extends EFrameBaseActivity {
 
     @Override
     public void initViews(View contentView) {
+        JLog.i("initViews");
     }
 
     @Override
-    public EFrameConfiguration getConfiguration() {
-        return new EFrameConfiguration.Builder()
-                .setSwipeBack(false) //首页设置禁止滑动退出
+    public EFrameConfiguration getConfiguration(EFrameConfiguration.Builder builder) {
+        return builder
+                .setSwipeBack(false)
                 .build();
     }
 }
