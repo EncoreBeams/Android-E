@@ -45,12 +45,6 @@ public abstract class EMvpBaseActivity<P extends EBasePresenter, M extends EBase
         super.onStart();
         JLog.i(TAG, "onActivityStart");
 
-        //回调初始化
-        if(!mIsInitViews) {
-            initViews(getContentView());
-            mIsInitViews = true;
-        }
-
         if (mModel == null) {
             //实例化 Model
             mModel = getModelInstance();
@@ -59,6 +53,11 @@ public abstract class EMvpBaseActivity<P extends EBasePresenter, M extends EBase
         if (mPresenter != null)
             mPresenter.setVM(EMvpBaseActivity.this, mModel);
 
+        //回调初始化
+        if(!mIsInitViews) {
+            initViews(getContentView());
+            mIsInitViews = true;
+        }
     }
 
     @Override

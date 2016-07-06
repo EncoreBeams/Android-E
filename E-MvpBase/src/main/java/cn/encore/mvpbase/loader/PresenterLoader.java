@@ -56,7 +56,9 @@ public class PresenterLoader<T extends EBasePresenter> extends Loader<T> {
 
     @Override
     protected void onReset() {
-        mPresenter.onDestroy();
+        if(mPresenter != null) {
+            mPresenter.onDestroy();
+        }
         mPresenter = null;
     }
 }

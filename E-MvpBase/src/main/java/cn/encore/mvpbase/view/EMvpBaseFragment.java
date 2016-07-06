@@ -37,21 +37,14 @@ public abstract class EMvpBaseFragment<P extends EBasePresenter, M extends EBase
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        //设置不调 initViews 回调,交给当前类处理
         getConfigDelegate().setEFrameConfiguration(getConfiguration(new EFrameConfiguration.Builder().setCallInitViews(false)));
-
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        JLog.i(TAG, "on Fragment Start");
-
-        //回调初始化
-        if (!mIsInitViews) {
-            initViews(getContentView());
-            mIsInitViews = true;
-        }
 
         if (mModel == null) {
             mModel = getModelInstance();
@@ -60,6 +53,11 @@ public abstract class EMvpBaseFragment<P extends EBasePresenter, M extends EBase
             mPresenter.setVM(this, mModel);
         }
 
+        //回调初始化
+        if (!mIsInitViews) {
+            initViews(getContentView());
+            mIsInitViews = true;
+        }
     }
 
     @Override
@@ -99,6 +97,7 @@ public abstract class EMvpBaseFragment<P extends EBasePresenter, M extends EBase
 
     //获取 Model 实例
     private M getModelInstance() {
+
         return TUtil.getT(EMvpBaseFragment.this, 1); //泛型第二个参数
     }
 
