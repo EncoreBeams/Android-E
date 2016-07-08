@@ -9,6 +9,7 @@ import butterknife.Bind;
 import cn.encore.demo.R;
 import cn.encore.demo.ui.base.TabActivity;
 import cn.encore.demo.ui.home.HomeFragment;
+import cn.encore.demo.ui.list.ListFragment;
 import cn.encore.framecommon.base.configuration.EFrameConfiguration;
 
 public class MainActivity extends TabActivity {
@@ -28,7 +29,6 @@ public class MainActivity extends TabActivity {
 
     @Override
     public void initViews(View contentView) {
-
     }
 
     @Override
@@ -43,7 +43,7 @@ public class MainActivity extends TabActivity {
 
     @Override
     public String[] getTabTitle() {
-        String[] mTitles = {"首页", "待定", "待定", "待定"};
+        String[] mTitles = {"首页", "列表示例", "待定", "待定"};
         return mTitles;
     }
 
@@ -67,7 +67,7 @@ public class MainActivity extends TabActivity {
     public Class[] getFragments() {
         Class[] clazzs = new Class[]{
                 HomeFragment.class,
-                HomeFragment.class,
+                ListFragment.class,
                 HomeFragment.class,
                 HomeFragment.class};
         return clazzs;
