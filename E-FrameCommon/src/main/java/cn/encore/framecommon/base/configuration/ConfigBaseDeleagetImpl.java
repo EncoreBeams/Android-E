@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import butterknife.ButterKnife;
 
@@ -61,24 +62,36 @@ public abstract class ConfigBaseDeleagetImpl extends ConfigDelegate {
      * @return
      */
     public View createContentView(ViewGroup container) {
+        LinearLayout parentView = new LinearLayout(mContext);
+        parentView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
         View contentView = mConfigSettingInterface.getContentView();
         if (contentView == null) {
             int resId = mConfigSettingInterface.getContentViewResId();
             //获取资源Id为-1不初始化
-            if (resId != -1) {
+            if (resId != -1 && resId != 0) {
                 //初始化容器,获取容器实体View
                 contentView = LayoutInflater.from(mContext).inflate(mConfigSettingInterface.getContentViewResId(), container);
             }
         }
+
         if (contentView != null) {
+            //添加容器前 返回parent对象
+            mConfigSettingInterface.onAddContainerViewBefore(parentView);
+
+            //返回内容View给子类处理
+            contentView = mConfigSettingInterface.onAddContentViewBefor(contentView);
+
+            if (contentView == null) {
+                throw new RuntimeException("new contentView can not be null!");
+            }
+
             //是否绑定依赖注入
             if (mEFrameConfiguration.isUseButterKnife()) {
                 ButterKnife.bind(mFrom, contentView);
             }
-            if(mEFrameConfiguration.isCallInitViews()) {
-                //回调initViews
-                mConfigSettingInterface.onViewReady(contentView);
-            }
+            //回调initViews
+            mConfigSettingInterface.onViewReady(contentView);
         }
         return contentView;
     }
@@ -99,6 +112,7 @@ public abstract class ConfigBaseDeleagetImpl extends ConfigDelegate {
     public void onPause() {
 
     }
+
     //onResume
     @Override
     public void onResume() {

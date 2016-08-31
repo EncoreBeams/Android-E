@@ -36,14 +36,7 @@ public class EFrameConfiguration {
         return mBuilder.isSwipeBack;
     }
 
-    /**
-     * 是否调用初始化 Views 方法
-     * @return
-     */
-    public boolean isCallInitViews(){
-        if(mBuilder == null) return true;
-        return mBuilder.isCallInitViews;
-    };
+
 
 
 
@@ -56,13 +49,11 @@ public class EFrameConfiguration {
         private boolean isUseButterKnife;
         //是否滑动退出
         private boolean isSwipeBack;
-        //是否调用初始化信息
-        private boolean isCallInitViews;
+
 
         public Builder() {
             isUseButterKnife = true;
             isSwipeBack = true;
-            isCallInitViews = true;
         }
 
         /**
@@ -86,10 +77,7 @@ public class EFrameConfiguration {
             return this;
         }
 
-        public Builder setCallInitViews(boolean callInitViews) {
-            isCallInitViews = callInitViews;
-            return this;
-        }
+
 
         public EFrameConfiguration build() {
             return new EFrameConfiguration(this);

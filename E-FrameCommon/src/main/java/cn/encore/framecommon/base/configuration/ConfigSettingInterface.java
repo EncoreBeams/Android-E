@@ -1,6 +1,7 @@
 package cn.encore.framecommon.base.configuration;
 
 import android.view.View;
+import android.widget.LinearLayout;
 
 /**
  * Created by：Encore
@@ -35,4 +36,18 @@ public interface ConfigSettingInterface {
      * @return
      */
     public EFrameConfiguration getConfiguration(EFrameConfiguration.Builder builder);
+
+    /**
+     * 在添加容器之前, 子类可以重写此方法,拿到parentView ,可以添加想要的View, 例如ToolBar 等, 会在内容View之上
+     * @param parentView
+     */
+    public void onAddContainerViewBefore(LinearLayout parentView);
+
+    /**
+     * 在添加内容View之前,可以拿到内容View的实体对象, 可以对该对象进行一些操作 , 返回一个新的内容View
+     * @param contentView
+     * @return new ContentView
+     */
+    public View onAddContentViewBefor(View contentView);
+
 }

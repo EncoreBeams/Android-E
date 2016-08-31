@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import cn.encore.framecommon.base.configuration.ConfigActivityDeleagetImpl;
 import cn.encore.framecommon.base.configuration.ConfigDelegate;
@@ -96,8 +97,23 @@ public abstract class EFrameBaseActivity extends AppCompatActivity implements Co
         mDelegate = null;
     }
 
+    /**
+     * 在添加内容View之前,可以拿到内容View的实体对象, 可以对该对象进行一些操作 , 返回一个新的内容View
+     * @param contentView
+     * @return new ContentView
+     */
+    @Override
+    public View onAddContentViewBefor(View contentView) {
+        return null;
+    }
 
+    /**
+     * 在添加容器之前, 子类可以重写此方法,拿到parentView ,可以添加想要的View, 例如ToolBar 等, 会在内容View之上
+     * @param parentView
+     */
+    @Override
+    public void onAddContainerViewBefore(LinearLayout parentView) {
 
-
+    }
 
 }
