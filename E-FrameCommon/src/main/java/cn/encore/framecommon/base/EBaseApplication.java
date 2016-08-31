@@ -20,9 +20,16 @@ public abstract class EBaseApplication extends Application {
 
     private final String LOG_PATH = "JLog";
 
+    public static EBaseApplication mApplication;
+
+    public static Application getApplication(){
+        return mApplication;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
+        mApplication = this;
         //初始化App配置
         initAppConfig();
     }

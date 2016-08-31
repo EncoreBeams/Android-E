@@ -28,7 +28,7 @@ public interface ConfigSettingInterface {
      *
      * @param contentView
      */
-    public void initViews(View contentView);
+    public void onViewReady(View contentView);
 
     /**
      * 获取设置管理器

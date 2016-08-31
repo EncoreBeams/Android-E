@@ -77,7 +77,7 @@ public abstract class ConfigBaseDeleagetImpl extends ConfigDelegate {
             }
             if(mEFrameConfiguration.isCallInitViews()) {
                 //回调initViews
-                mConfigSettingInterface.initViews(contentView);
+                mConfigSettingInterface.onViewReady(contentView);
             }
         }
         return contentView;

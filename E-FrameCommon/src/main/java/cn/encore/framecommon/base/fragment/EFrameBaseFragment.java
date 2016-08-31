@@ -1,5 +1,6 @@
 package cn.encore.framecommon.base.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -105,4 +106,10 @@ public abstract class EFrameBaseFragment extends Fragment implements ConfigSetti
         mDelegate = null;
     }
 
+    public Context getApplicationContext() {
+        if (getActivity() != null) {
+            return getActivity().getApplicationContext();
+        }
+        return getContext();
+    }
 }
