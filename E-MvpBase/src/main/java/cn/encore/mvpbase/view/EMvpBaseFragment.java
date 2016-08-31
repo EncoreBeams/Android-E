@@ -2,14 +2,11 @@ package cn.encore.mvpbase.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import cn.encore.framecommon.base.configuration.EFrameConfiguration;
 import cn.encore.framecommon.base.fragment.EFrameBaseFragment;
-import cn.encore.framecommon.log.jlog.JLog;
-import cn.encore.mvpbase.loader.PresenterFactory;
-import cn.encore.mvpbase.loader.PresenterLoader;
 import cn.encore.mvpbase.model.EBaseModel;
 import cn.encore.mvpbase.mvputils.TUtil;
 import cn.encore.mvpbase.presenter.EBasePresenter;
@@ -18,46 +15,43 @@ import cn.encore.mvpbase.presenter.EBasePresenter;
  * Created by：Encore
  * Created Time：16/7/4 18:38
  */
-public abstract class EMvpBaseFragment<P extends EBasePresenter, M extends EBaseModel> extends EFrameBaseFragment implements LoaderManager.LoaderCallbacks<EBasePresenter> {
+public abstract class EMvpBaseFragment<P extends EBasePresenter, M extends EBaseModel> extends EFrameBaseFragment {
     private static final String TAG = "EMvpBaseFragment";
     private static int LOADER_ID = 102;
     //p 层实例
     private EBasePresenter mPresenter;
     //model 层实例
     private EBaseModel mModel;
-    //is init views
-    private boolean mIsInitViews = false;
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        // 初始化代码
-        getActivity().getSupportLoaderManager().initLoader(LOADER_ID, null, this);
-    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        //设置不调 initViews 回调,交给当前类处理
-        getConfigDelegate().setEFrameConfiguration(getConfiguration(new EFrameConfiguration.Builder().setCallInitViews(false)));
         super.onCreate(savedInstanceState);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+
+        if (mModel == null) {
+            mModel = getModelInstance();
+        }
+        if (mPresenter == null) {
+            mPresenter = getPresenterInstance();
+        }
+        if (mPresenter != null) {
+            mPresenter.setVM(this, mModel);
+        }
+        return view;
     }
 
     @Override
     public void onStart() {
         super.onStart();
 
-        if (mModel == null) {
-            mModel = getModelInstance();
-        }
-        if (mPresenter != null) {
-            mPresenter.setVM(this, mModel);
-        }
 
-        //回调初始化
-        if (!mIsInitViews) {
-            initViews(getContentView());
-            mIsInitViews = true;
-        }
     }
 
     @Override
@@ -68,27 +62,6 @@ public abstract class EMvpBaseFragment<P extends EBasePresenter, M extends EBase
         }
     }
 
-    //通过 loader 处理 activity 销毁,旋转屏幕等情况, presenter 复用
-    @Override
-    public Loader<EBasePresenter> onCreateLoader(int id, Bundle args) {
-        return new PresenterLoader<>(getActivity(), new PresenterFactory<EBasePresenter>() {
-            @Override
-            public EBasePresenter create() {
-                mPresenter = getPresenterInstance();
-                return mPresenter;
-            }
-        });
-    }
-
-    @Override
-    public void onLoadFinished(Loader<EBasePresenter> loader, EBasePresenter data) {
-        this.mPresenter = data;
-    }
-
-    @Override
-    public void onLoaderReset(Loader<EBasePresenter> loader) {
-        mPresenter = null;
-    }
 
     //获取 Presenter 实例
     private P getPresenterInstance() {
@@ -109,5 +82,10 @@ public abstract class EMvpBaseFragment<P extends EBasePresenter, M extends EBase
     protected M getModel() {
         if (mModel == null) return null;
         return (M) mModel;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 }
