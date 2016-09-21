@@ -104,7 +104,7 @@ public abstract class EFrameBaseActivity extends AppCompatActivity implements Co
      */
     @Override
     public View onAddContentViewBefor(View contentView) {
-        return null;
+        return contentView;
     }
 
     /**

@@ -28,7 +28,7 @@ public class MainActivity extends TabActivity {
     }
 
     @Override
-    public void initViews(View contentView) {
+    public void onViewReady(View contentView) {
     }
 
     @Override

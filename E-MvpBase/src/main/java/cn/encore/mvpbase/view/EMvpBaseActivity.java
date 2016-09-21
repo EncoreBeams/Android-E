@@ -46,8 +46,6 @@ public abstract class EMvpBaseActivity<P extends EBasePresenter, M extends EBase
     public void onStart() {
         super.onStart();
         JLog.i(TAG, "onActivityStart");
-
-
     }
 
     @Override

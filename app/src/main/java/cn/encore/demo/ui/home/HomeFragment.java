@@ -16,7 +16,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
-    public void initViews(View contentView) {
+    public void onViewReady(View contentView) {
 
     }
 }

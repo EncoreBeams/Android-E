@@ -63,6 +63,7 @@ public abstract class ConfigBaseDeleagetImpl extends ConfigDelegate {
      */
     public View createContentView(ViewGroup container) {
         LinearLayout parentView = new LinearLayout(mContext);
+        parentView.setOrientation(LinearLayout.VERTICAL);
         parentView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
         View contentView = mConfigSettingInterface.getContentView();
@@ -80,20 +81,23 @@ public abstract class ConfigBaseDeleagetImpl extends ConfigDelegate {
             mConfigSettingInterface.onAddContainerViewBefore(parentView);
 
             //返回内容View给子类处理
-            contentView = mConfigSettingInterface.onAddContentViewBefor(contentView);
+            View temp = mConfigSettingInterface.onAddContentViewBefor(contentView);
 
-            if (contentView == null) {
-                throw new RuntimeException("new contentView can not be null!");
+            if (temp != null) {
+                contentView = temp;
             }
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+            parentView.addView(contentView, params);
 
             //是否绑定依赖注入
             if (mEFrameConfiguration.isUseButterKnife()) {
-                ButterKnife.bind(mFrom, contentView);
+                ButterKnife.bind(mFrom, parentView);
             }
             //回调initViews
-            mConfigSettingInterface.onViewReady(contentView);
+            mConfigSettingInterface.onViewReady(parentView);
         }
-        return contentView;
+        return parentView;
     }
 
 
