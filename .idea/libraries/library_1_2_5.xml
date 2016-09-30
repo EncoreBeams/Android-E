@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="library-1.2.5">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.liaoinstan.springview/library/1.2.5/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.liaoinstan.springview/library/1.2.5/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.liaoinstan.springview/library/1.2.5/e3b3462266750436ea7be67b333e6ce5f5a0e589/library-1.2.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

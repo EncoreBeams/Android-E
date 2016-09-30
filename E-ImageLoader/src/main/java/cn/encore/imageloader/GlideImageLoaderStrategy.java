@@ -28,7 +28,6 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy {
         boolean flag = SettingUtils.getOnlyWifiLoadImg(ctx);
         //如果不是在wifi下加载图片，直接加载
 
-
         int strategy = img.getWifiStrategy();
         if (strategy == ImageLoaderManager.LOAD_STRATEGY_ONLY_WIFI || flag) {
             int netType = AppUtils.getNetWorkType(ctx);
